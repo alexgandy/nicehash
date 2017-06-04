@@ -1,0 +1,28 @@
+{
+  "name": "nicehash",
+  "version": "1.0.0",
+  "description": "NiceHash API Wrapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexgandy/nicehash.git"
+  },
+  "keywords": [
+    "NiceHash"
+  ],
+  "author": "Alex Gandy <alexgandy@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexgandy/nicehash/issues"
+  },
+  "homepage": "https://github.com/alexgandy/nicehash#readme",
+  "dependencies": {
+    "chai": "^4.0.1",
+    "got": "^7.0.0",
+    "lodash": "^4.17.4",
+    "mocha": "^3.4.2"
+  }
+}
