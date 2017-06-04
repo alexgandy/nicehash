@@ -1,0 +1,2 @@
+# nicehash
+NiceHash API Wrapper
