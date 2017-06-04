@@ -76,12 +76,12 @@ class NiceHashClient {
 
     getRequestPromise(methodName, queryParams) {
         const methodObj = { method: methodName };
-        const payload = _.merge(gotOptions, {query: _.merge(methodObj, queryParams || {})});
+        const payload = _.merge({}, gotOptions, {query: _.merge(methodObj, queryParams || {})});
 
         return got(`${API_BASE_URL}`, payload);
     }
 
-    // PRIVATE (AUTHENTICATED) API ENDPOINTS
+    // AUTHENTICATED API ENDPOINTS
 
     /**
      * Get all orders for certain algorithm owned by the customer. Refreshed every 30 seconds.
@@ -93,15 +93,99 @@ class NiceHashClient {
         return this.getRequestPromise('orders.get', params);
     }
 
+    /**
+     * Create new order. Only standard orders can be created with use of API.
+     * @param orderOptions Object
+     * @param orderOptions.location Number - 0 for Europe (NiceHash), 1 for USA (WestHash).
+     * @param orderOptions.algo Number - Algorithm marked with ID.
+     * @param orderOptions.amount Number - Pay amount in BTC.
+     * @param orderOptions.price Number - Price in BTC/GH/Day or BTC/TH/Day.
+     * @param orderOptions.limit Number - Speed limit in GH/s or TH/s (0 for no limit).
+     * @param orderOptions.code - Required code if 2FA is enabled
+     * @param orderOptions.pool_host String - Pool hostname or IP.
+     * @param orderOptions.pool_port String - Pool port.
+     * @param orderOptions.pool_user String - Pool username.
+     * @param orderOptions.pool_pass String - Pool password.
+     */
+    createOrder(orderOptions) {
+        const params = _.merge(orderOptions, this.getAuthParams());
+
+        return this.getRequestPromise('orders.create', params);
+    }
+
+    /**
+     * Refill order with extra Bitcoins.
+     * @param orderOptions Object
+     * @param orderOptions.location Number - 0 for Europe (NiceHash), 1 for USA (WestHash).
+     * @param orderOptions.algo Number - Algorithm marked with ID.
+     * @param orderOptions.order Number - Existing orderId.
+     * @param orderOptions.amount Number - Pay amount in BTC.
+     */
+    refillOrder(orderOptions) {
+        const params = _.merge(orderOptions, this.getAuthParams());
+
+        return this.getRequestPromise('orders.refill', params);
+    }
+
+    /**
+     * Remove existing order.
+     * @param orderOptions Object
+     * @param orderOptions.location Number - 0 for Europe (NiceHash), 1 for USA (WestHash).
+     * @param orderOptions.algo Number - Algorithm marked with ID.
+     * @param orderOptions.order Number - Existing orderId.
+     */
+    removeOrder(orderOptions) {
+        const params = _.merge(orderOptions, this.getAuthParams());
+
+        return this.getRequestPromise('orders.remove', params);
+    }
+
+    /**
+     * Set new price for the existing order. Only increase is possible.
+     * @param orderOptions Object
+     * @param orderOptions.location Number - 0 for Europe (NiceHash), 1 for USA (WestHash).
+     * @param orderOptions.algo Number - Algorithm marked with ID.
+     * @param orderOptions.order Number - Existing orderId.
+     * @param orderOptions.price Number - Price in BTC/GH/Day or BTC/TH/Day
+     */
+    setOrderPrice(orderOptions) {
+        const params = _.merge(orderOptions, this.getAuthParams());
+
+        return this.getRequestPromise('orders.set.price', params);
+    }
+
+    /**
+     * Decrease price for the existing order. Price decrease possible every 10 minutes.
+     * @param orderOptions Object
+     * @param orderOptions.location Number - 0 for Europe (NiceHash), 1 for USA (WestHash).
+     * @param orderOptions.algo Number - Algorithm marked with ID.
+     * @param orderOptions.order Number - Existing orderId.
+     */
+    decreaseOrderPrice(orderOptions) {
+        const params = _.merge(orderOptions, this.getAuthParams());
+
+        return this.getRequestPromise('orders.set.price.decrease', params);
+    }
+
+    /**
+     * Set new limit for existing order
+     * @param orderOptions Object
+     * @param orderOptions.location Number - 0 for Europe (NiceHash), 1 for USA (WestHash).
+     * @param orderOptions.algo Number - Algorithm marked with ID.
+     * @param orderOptions.order Number - Existing orderId.
+     * @param orderOptions.limit Number - Speed limit in GH/s or TH/s (0 for no limit).
+     */
+    setOrderLimit(orderOptions) {
+        const params = _.merge(orderOptions, this.getAuthParams());
+
+        return this.getRequestPromise('orders.set.limit', params);
+    }
+
     getMyBalance() {
         return this.getRequestPromise('balance', this.getAuthParams());
     }
 
     // PUBLIC API ENDPOINTS
-
-    static getAlgorithmName(niceHashInternalAlgoCode) {
-        return ALGORITHMS[niceHashInternalAlgoCode];
-    }
 
     static getApiVersion() {
         return got(API_BASE_URL, gotOptions);
