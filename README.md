@@ -31,6 +31,91 @@ const nh = new NiceHashClient({apiId: '123456', apiKey: '66666666-6666-6666-6666
 
 All of the methods correspond to [NiceHash's API documentation](https://www.nicehash.com/index.jsp?p=api).
 
+### Private API Methods (Require Authentication)
+
+#### `nh.getMyOrders(location, algo)`
+
+Get all orders for certain algorithm owned by the customer. Refreshed every 30 seconds.
+
+| param    | type    | description                                  |
+| -------- | ------- | -------------------------------------------- |
+| location | Number  | Location, 0 for Europe, 1 for USA.           |
+| algo     | Number  | Algorithm marked with ID                     |
+
+#### `nh.createOrder(orderOptions)`
+
+Create new order. Only standard orders can be created with use of API.
+
+| param                  | type   | description                                    |
+| ---------------------- | ------ | ---------------------------------------------- |
+| orderOptions.location  | Number | 0 for Europe (NiceHash), 1 for USA (WestHash). |
+| orderOptions.algo      | Number | Algorithm marked with ID.                      |
+| orderOptions.amount    | Number | Pay amount in BTC.                             |
+| orderOptions.price     | Number | Price in BTC/GH/Day or BTC/TH/Day.             |
+| orderOptions.limit     | Number | Speed limit in GH/s or TH/s (0 for no limit).  |
+| orderOptions.code      | Number | Required code if 2FA is enabled                |
+| orderOptions.pool_host | String | Pool hostname or IP.                           |
+| orderOptions.pool_port | String | Pool port.                                     |
+| orderOptions.pool_user | String | Pool username.                                 |
+| orderOptions.pool_pass | String | Pool password.                                 |
+
+#### `nh.refillOrder(orderOptions)`
+
+Refill order with extra Bitcoins.
+
+| param                  | type   | description                                    |
+| ---------------------- | ------ | ---------------------------------------------- |
+| orderOptions.location  | Number | 0 for Europe (NiceHash), 1 for USA (WestHash). |
+| orderOptions.algo      | Number | Algorithm marked with ID.                      |
+| orderOptions.amount    | Number | Pay amount in BTC.                             |
+| orderOptions.order     | Number | Existing Order ID                              |
+
+#### `nh.removeOrder(orderOptions)`
+
+Remove existing order.
+
+| param                  | type   | description                                    |
+| ---------------------- | ------ | ---------------------------------------------- |
+| orderOptions.location  | Number | 0 for Europe (NiceHash), 1 for USA (WestHash). |
+| orderOptions.algo      | Number | Algorithm marked with ID.                      |
+| orderOptions.order     | Number | Existing Order ID                              |
+
+#### `nh.setOrderPrice(orderOptions)`
+
+Set new price for the existing order. Only increase is possible.
+
+| param                  | type   | description                                    |
+| ---------------------- | ------ | ---------------------------------------------- |
+| orderOptions.location  | Number | 0 for Europe (NiceHash), 1 for USA (WestHash). |
+| orderOptions.algo      | Number | Algorithm marked with ID.                      |
+| orderOptions.price     | Number | Price in BTC/GH/Day or BTC/TH/Day              |
+| orderOptions.order     | Number | Existing Order ID                              |
+
+#### `nh.decreaseOrderPrice(orderOptions)`
+
+Decrease price for the existing order. Price decrease possible every 10 minutes.
+
+| param                  | type   | description                                    |
+| ---------------------- | ------ | ---------------------------------------------- |
+| orderOptions.location  | Number | 0 for Europe (NiceHash), 1 for USA (WestHash). |
+| orderOptions.algo      | Number | Algorithm marked with ID.                      |
+| orderOptions.order     | Number | Existing Order ID                              |
+
+#### `nh.setOrderLimit(orderOptions)`
+
+| param                  | type   | description                                    |
+| ---------------------- | ------ | ---------------------------------------------- |
+| orderOptions.location  | Number | 0 for Europe (NiceHash), 1 for USA (WestHash). |
+| orderOptions.algo      | Number | Algorithm marked with ID.                      |
+| orderOptions.limit     | Number | Speed limit in GH/s or TH/s (0 for no limit).  |
+| orderOptions.order     | Number | Existing Order ID                              |
+
+#### `nh.getMyBalance()`
+
+Get current Bitcoin balance (confirmed and pending).
+
+***
+
 ### Public API Methods
 
 #### `nh.getGlobalCurrentStats(location)`
