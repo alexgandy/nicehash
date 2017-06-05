@@ -2,7 +2,7 @@
 Node NiceHash API Wrapper
 
 A simple API wrapper for the cloud mining site NiceHash.
-
+ 
 ## Installation
 
 If you want to place or modify orders you need a NiceHash account. Under Account > General, you'll find your API ID and Key. You cannot use your read-only API Key.
@@ -176,3 +176,14 @@ Get information about Simple Multi-Algorithm Mining. [More Here](https://www.nic
 
 Get needed information for buying hashing power using NiceHashBot (https://github.com/nicehash/NiceHashBot)
 
+***
+
+### Contribute
+
+Contributions are welcome and would be awesome. It's a fairly straightforward app. Everything lives in `NiceHashClient.js`, and tests can be run with `mocha`.
+
+### Donate
+
+*BTC* `1BGfrJHTDeH19FXcR5PK7EPYp43bgWFxDA`
+
+*ETH* `0xc71e857ee666ec5e0b9789ac43f691e78788c5d0`
