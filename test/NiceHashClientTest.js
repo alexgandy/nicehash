@@ -39,6 +39,23 @@ context('NiceHashClient', () => {
             });
         });
 
+        describe('getNiceHashAlgorithmNumberByName', () => {
+            const daggerhashimoto = NiceHashClient.getNiceHashAlgorithmNumberByName('daggerhashimoto');
+            daggerhashimoto.should.eql('20');
+
+            const notFound = NiceHashClient.getNiceHashAlgorithmNumberByName(123);
+            should.not.exist(notFound);
+        });
+
+        describe('getAlgorithmNameByNiceHashNumber', () => {
+            const daggerhashimoto = NiceHashClient.getAlgorithmNameByNiceHashNumber(20);
+            daggerhashimoto.should.eql('daggerhashimoto');
+
+            const notFound = NiceHashClient.getAlgorithmNameByNiceHashNumber(123);
+            should.not.exist(notFound);
+        });
+
+
         describe('getGlobalCurrentStats', () => {
             it('should correctly get global current stats', function() {
                 return nh.getGlobalCurrentStats().then((response) => {

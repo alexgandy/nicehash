@@ -118,6 +118,26 @@ Get current Bitcoin balance (confirmed and pending).
 
 ### Public API Methods
 
+#### `getApiVersion()`
+
+Returns the current API version
+
+#### `getNiceHashAlgorithmNumberByName(algoName)`
+
+Returns the internal NiceHash algorithm ID (or null if not found) for the given hashing algorithm.
+
+| param      | type    | description                                             |
+| ---------- | ------- | ------------------------------------------------------- |
+| algoName   | String  | Name of algorithm                                       |
+
+#### `getAlgorithmNameByNiceHashNumber(number)`
+
+Returns the internal NiceHash algorithm ID (or null if not found) for the given hashing algorithm.
+
+| param      | type    | description                                             |
+| ---------- | ------- | ------------------------------------------------------- |
+| number     | Number  | Internal NiceHash algo ID                               |
+
 #### `nh.getGlobalCurrentStats(location)`
 
 | param      | type    | description                                             |

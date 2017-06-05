@@ -19,34 +19,34 @@ const LOCATIONS = {
 };
 
 const ALGORITHMS = {
-    0: 'Scrypt',
-    1: 'SHA256',
-    2: 'ScryptNf',
-    3: 'X11',
-    4: 'X13',
-    5: 'Keccak',
-    6: 'X15',
-    7: 'Nist5',
-    8: 'NeoScrypt',
-    9: 'Lyra2RE',
-    10: 'WhirlpoolX',
-    11: 'Qubit',
-    12: 'Quark',
-    13: 'Axiom',
-    14: 'Lyra2REv2',
-    15: 'ScryptJaneNf16',
-    16: 'Blake256r8',
-    17: 'Blake256r14',
-    18: 'Blake256r8vnl',
-    19: 'Hodl',
-    20: 'DaggerHashimoto',
-    21: 'Decred',
-    22: 'CryptoNight',
-    23: 'Lbry',
-    24: 'Equihash',
-    25: 'Pascal',
-    26: 'X11Gost',
-    27: 'Sia'
+    0: 'scrypt',
+    1: 'sha256',
+    2: 'scryptnf',
+    3: 'x11',
+    4: 'x13',
+    5: 'keccak',
+    6: 'x15',
+    7: 'nist5',
+    8: 'neoscrypt',
+    9: 'lyra2re',
+    10: 'whirlpoolx',
+    11: 'qubit',
+    12: 'quark',
+    13: 'axiom',
+    14: 'lyra2rev2',
+    15: 'scryptjanenf16',
+    16: 'blake256r8',
+    17: 'blake256r14',
+    18: 'blake256r8vnl',
+    19: 'hodl',
+    20: 'daggerhashimoto',
+    21: 'decred',
+    22: 'cryptonight',
+    23: 'lbry',
+    24: 'equihash',
+    25: 'pascal',
+    26: 'x11gost',
+    27: 'sia',
 };
 
 const ORDER_TYPES = {
@@ -189,6 +189,14 @@ class NiceHashClient {
 
     static getApiVersion() {
         return got(API_BASE_URL, gotOptions);
+    }
+
+    static getNiceHashAlgorithmNumberByName(algoName) {
+        return _.findKey(ALGORITHMS, (i) => { return i === algoName }) || null;
+    }
+
+    static getAlgorithmNameByNiceHashNumber(number) {
+        return ALGORITHMS[number] || null;
     }
 
     /**
