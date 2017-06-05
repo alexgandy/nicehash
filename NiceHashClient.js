@@ -191,14 +191,28 @@ class NiceHashClient {
         return got(API_BASE_URL, gotOptions);
     }
 
-    getGlobalCurrentStats() {
-        return this.getRequestPromise('stats.global.current');
+    /**
+     * Get current profitability (price) and hashing speed for all algorithms. Refreshed every 30 seconds
+     * @param location {Number} - Location, 0 for Europe, 1 for USA. Optional
+     * @return {*}
+     */
+    getGlobalCurrentStats(location) {
+        return this.getRequestPromise('stats.global.current', location ? {location} : null);
     }
 
+    /**
+     * Get average profitability (price) and hashing speed for all algorithms in past 24 hours.
+     * @return {*}
+     */
     getGlobal24hStats() {
         return this.getRequestPromise('stats.global.24h');
     }
 
+    /**
+     * Get current stats for provider for all algorithms. Refreshed every 30 seconds. It also returns past 56 payments.
+     * @param addr
+     * @return {*}
+     */
     getProviderStats(addr) {
         return this.getRequestPromise('stats.global.24h', { addr });
     }
