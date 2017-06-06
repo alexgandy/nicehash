@@ -204,6 +204,6 @@ Contributions are welcome and would be awesome. It's a fairly straightforward ap
 
 ### Donate
 
-*BTC* `1BGfrJHTDeH19FXcR5PK7EPYp43bgWFxDA`
+*BTC* `1SUACoD5zyienrajU5PAKADGwySQYVD8G`
 
-*ETH* `0xc71e857ee666ec5e0b9789ac43f691e78788c5d0`
+*ETH* `0x4E821B7F5Ce9F04dbd7aDe5B98dC597a43e3a6C6`
