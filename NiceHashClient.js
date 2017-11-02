@@ -248,6 +248,16 @@ class NiceHashClient {
     getProviderWorkersStats(addr, algo) {
         return this.getRequestPromise('stats.provider.workers', { addr, algo });
     }
+    
+    /**
+     * Get detailed stats for provider's workers (rigs).
+     * @param addr String - Provider's BTC Address
+     * @param algo Number - Algorithm marked with ID
+     * @return {*}
+     */
+    getAllProviderWorkersStats(addr) {
+        return this.getRequestPromise('stats.provider.workers', { addr });
+    }
 
     /**
      * Get all orders for certain algorithm. Refreshed every 30 seconds.

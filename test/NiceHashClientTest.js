@@ -99,6 +99,16 @@ context('NiceHashClient', () => {
                 });
             });
         });
+        
+        describe('getAllProviderWorkersStats', () => {
+            it('should get provider workers stats', function() {
+                const testAddress = `17a212wdrvEXWuipCV5gcfxdALfMdhMoqh`;
+                const testAlgo = 3;
+                return nh.getProviderWorkersStats(testAddress, testAlgo).then((response) => {
+                    response.body.uri.should.eql('/api?method=stats.provider.workers&addr=17a212wdrvEXWuipCV5gcfxdALfMdhMoqh');
+                });
+            });
+        });
 
         describe('getOrders', () => {
             it('should get all orders', function() {
