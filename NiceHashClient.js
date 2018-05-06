@@ -47,6 +47,9 @@ const ALGORITHMS = {
     25: 'pascal',
     26: 'x11gost',
     27: 'sia',
+    28: 'blake2s',
+    29: 'skunk',
+    30: 'cryptonightv7'
 };
 
 const ORDER_TYPES = {
